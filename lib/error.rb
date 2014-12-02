@@ -5,4 +5,10 @@ module Kahtzee
       'with integer values in the range 1..6'
     end
   end
+
+  class UnknownCategoryError < StandardError
+    def to_s
+      'Invalid Kahtzee category'
+    end
+  end
 end
