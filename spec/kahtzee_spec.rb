@@ -16,5 +16,16 @@ describe 'Kahtzee' do
       expect(parameters.first).to eq [:req, :roll]
       expect(parameters.last).to eq [:req, :category]
     end
+
+    it 'raises a BadRollError on invalid roll input' do
+      expect { score([1, 2, 3, 4, 5, 6], 1) }
+        .to raise_error Kahtzee::BadRollError
+      expect { score([1, 2, 3, 45, 5], 1) }
+        .to raise_error Kahtzee::BadRollError
+      expect { score([1, 2.5, 3, 3, 5], 1) }
+        .to raise_error Kahtzee::BadRollError
+      expect { score([1, 2, 2, 6, 6], 1) }
+        .not_to raise_error
+    end
   end
 end
