@@ -1,4 +1,4 @@
 module Kahtzee
-  def score
+  def score(roll, category)
   end
 end
