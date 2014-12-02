@@ -21,7 +21,31 @@ module Kahtzee
   end
 
   def ones
-    roll.count(1) * 1
+    tally 1
+  end
+
+  def twos
+    tally 2
+  end
+
+  def threes
+    tally 3
+  end
+
+  def fours
+    tally 4
+  end
+
+  def fives
+    tally 5
+  end
+
+  def sixes
+    tally 6
+  end
+
+  def tally(die_value)
+    roll.count(die_value) * die_value
   end
 
   def small_straight
