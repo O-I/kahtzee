@@ -20,6 +20,10 @@ module Kahtzee
     roll.size == 5 && (roll - [*1..6]).empty?
   end
 
+  def ones
+    roll.count(1) * 1
+  end
+
   def small_straight
     roll == [*1..5] ? 15 : 0
   end
@@ -32,11 +36,11 @@ module Kahtzee
     five_of_a_kind? ? 50 : 0
   end
 
-  def chance
-    roll.reduce(:+)
-  end
-
   def five_of_a_kind?
     roll.uniq.size == 1
+  end
+
+  def chance
+    roll.reduce(:+)
   end
 end
