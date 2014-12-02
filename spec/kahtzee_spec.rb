@@ -39,6 +39,10 @@ describe 'Kahtzee' do
       expect(score([1, 2, 3, 4, 5], :chance)).to eq 15
       expect(score([3, 3, 3, 3, 3], :kahtzee)).to eq 50
       expect(score([2, 2, 2, 4, 2], :kahtzee)).to eq 0
+      expect(score([1, 2, 3, 4, 5], :small_straight)).to eq 15
+      expect(score([1, 2, 2, 6, 6], :small_straight)).to eq 0
+      expect(score([2, 3, 4, 5, 6], :large_straight)).to eq 20
+      expect(score([1, 2, 2, 6, 6], :large_straight)).to eq 0
     end
   end
 end

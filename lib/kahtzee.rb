@@ -20,6 +20,14 @@ module Kahtzee
     roll.size == 5 && (roll - [*1..6]).empty?
   end
 
+  def small_straight
+    roll == [*1..5] ? 15 : 0
+  end
+
+  def large_straight
+    roll == [*2..6] ? 20 : 0
+  end
+
   def kahtzee
     five_of_a_kind? ? 50 : 0
   end
