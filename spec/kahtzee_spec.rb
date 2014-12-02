@@ -37,6 +37,8 @@ describe 'Kahtzee' do
 
     it 'returns the score of a roll in a given category' do
       expect(score([1, 2, 3, 4, 5], :chance)).to eq 15
+      expect(score([3, 3, 3, 3, 3], :kahtzee)).to eq 50
+      expect(score([2, 2, 2, 4, 2], :kahtzee)).to eq 0
     end
   end
 end
