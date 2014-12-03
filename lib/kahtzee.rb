@@ -12,7 +12,7 @@ module Kahtzee
     raise BadRollError unless valid_roll?
     raise UnknownCategoryError unless VALID_CATEGORIES.include? category.to_sym
     @frequency = frequency_distribution
-    self.send(category.to_sym)
+    self.send(category.to_sym) || 0
   end
 
   private
@@ -51,7 +51,7 @@ module Kahtzee
 
   def two_pairs
     multiplicands = frequency.select { |k, v| v > 1 }
-    multiplicands.size == 2 ? multiplicands.keys.reduce(:+) * 2 : 0
+    multiplicands.keys.reduce(:+) * 2 if multiplicands.size == 2
   end
 
   def three_of_a_kind
@@ -64,7 +64,7 @@ module Kahtzee
 
   def of_a_kind(kind_count)
     multiplicands = frequency.detect { |_, v| v == kind_count }
-    multiplicands ? multiplicands.reduce(:*) : 0
+    multiplicands.reduce(:*) if multiplicands
   end
 
   def tally(die_value)
@@ -72,19 +72,19 @@ module Kahtzee
   end
 
   def small_straight
-    roll == [*1..5] ? 15 : 0
+    15 if roll == [*1..5]
   end
 
   def large_straight
-    roll == [*2..6] ? 20 : 0
+    20 if roll == [*2..6]
   end
 
   def full_house
-    (pair? && three_of_a_kind? && !five_of_a_kind?) ? chance : 0
+    chance if pair? && three_of_a_kind? && !five_of_a_kind?
   end
 
   def kahtzee
-    five_of_a_kind? ? 50 : 0
+    50 if five_of_a_kind?
   end
 
   def pair?
