@@ -79,12 +79,28 @@ module Kahtzee
     roll == [*2..6] ? 20 : 0
   end
 
+  def full_house
+    (pair? && three_of_a_kind? && !five_of_a_kind?) ? chance : 0
+  end
+
   def kahtzee
     five_of_a_kind? ? 50 : 0
   end
 
+  def pair?
+    frequency.values.include? 2
+  end
+
+  def three_of_a_kind?
+    frequency.values.include? 3
+  end
+
+  def four_of_a_kind?
+    frequency.values.include? 4
+  end
+
   def five_of_a_kind?
-    roll.uniq.size == 1
+    frequency.values.include? 5
   end
 
   def chance
