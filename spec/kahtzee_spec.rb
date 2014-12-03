@@ -38,22 +38,41 @@ describe 'Kahtzee' do
     it 'returns the score of a roll in a given category' do
       expect(score([1, 1, 2, 3, 4], :ones)).to eq 2
       expect(score([2, 3, 4, 5, 6], :ones)).to eq 0
+
       expect(score([2, 2, 2, 4, 5], :twos)).to eq 6
       expect(score([1, 3, 4, 5, 6], :twos)).to eq 0
+
       expect(score([3, 1, 4, 3, 3], :threes)).to eq 9
       expect(score([1, 2, 4, 5, 6], :threes)).to eq 0
+
       expect(score([2, 4, 6, 4, 2], :fours)).to eq 8
       expect(score([6, 5, 3, 2, 1], :fours)).to eq 0
+
       expect(score([5, 5, 6, 5, 6], :fives)).to eq 15
       expect(score([6, 4, 3, 2, 1], :fives)).to eq 0
+
       expect(score([6, 6, 5, 6, 6], :sixes)).to eq 24
       expect(score([5, 4, 3, 2, 1], :sixes)).to eq 0
+
+      expect(score([1, 1, 2, 3, 4], :pair)).to eq 2
+      expect(score([1, 2, 2, 1, 6], :pair)).to eq 4
+      expect(score([1, 2, 3, 4, 5], :pair)).to eq 0
+
+      expect(score([3, 2, 3, 1, 3], :three_of_a_kind)).to eq 9
+      expect(score([1, 2, 3, 3, 2], :three_of_a_kind)).to eq 0
+
+      expect(score([6, 5, 6, 6, 6], :four_of_a_kind)).to eq 24
+      expect(score([1, 1, 2, 2, 2], :four_of_a_kind)).to eq 0
+
       expect(score([1, 2, 3, 4, 5], :small_straight)).to eq 15
       expect(score([1, 2, 2, 6, 6], :small_straight)).to eq 0
+
       expect(score([2, 3, 4, 5, 6], :large_straight)).to eq 20
       expect(score([1, 2, 2, 6, 6], :large_straight)).to eq 0
+
       expect(score([3, 3, 3, 3, 3], :kahtzee)).to eq 50
       expect(score([2, 2, 2, 4, 2], :kahtzee)).to eq 0
+
       expect(score([1, 2, 3, 4, 5], :chance)).to eq 15
     end
   end

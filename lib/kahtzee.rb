@@ -1,7 +1,7 @@
 require_relative 'error'
 
 module Kahtzee
-  attr_reader :roll
+  attr_reader :roll, :frequency
   VALID_CATEGORIES = [:ones, :twos, :threes, :fours, :fives, :sixes,
                       :pair, :two_pairs, :three_of_a_kind, :four_of_a_kind,
                       :small_straight, :large_straight, :full_house,
@@ -11,6 +11,7 @@ module Kahtzee
     @roll = roll
     raise BadRollError unless valid_roll?
     raise UnknownCategoryError unless VALID_CATEGORIES.include? category.to_sym
+    @frequency = frequency_distribution
     self.send(category.to_sym)
   end
 
@@ -44,6 +45,23 @@ module Kahtzee
     tally 6
   end
 
+  def pair
+    of_a_kind 2
+  end
+
+  def three_of_a_kind
+    of_a_kind 3
+  end
+
+  def four_of_a_kind
+    of_a_kind 4
+  end
+
+  def of_a_kind(kind_count)
+    sum = frequency.detect { |_, v| v == kind_count }
+    sum ? sum.reduce(:*) : 0
+  end
+
   def tally(die_value)
     roll.count(die_value) * die_value
   end
@@ -66,5 +84,12 @@ module Kahtzee
 
   def chance
     roll.reduce(:+)
+  end
+
+  def frequency_distribution
+    roll.reduce(Hash.new(0)) do |hash, element|
+      hash[element] += 1
+      hash
+    end.sort_by { |k, v| [-v, -k] }.to_h
   end
 end
