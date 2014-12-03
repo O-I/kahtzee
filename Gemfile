@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rake'
-
 group :development, :test do
+  gem 'rake'
   gem 'pry'
   gem 'pry-rescue'
   gem 'pry-stack_explorer'
