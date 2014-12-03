@@ -49,6 +49,11 @@ module Kahtzee
     of_a_kind 2
   end
 
+  def two_pairs
+    multiplicands = frequency.select { |k, v| v > 1 }
+    multiplicands.size == 2 ? multiplicands.keys.reduce(:+) * 2 : 0
+  end
+
   def three_of_a_kind
     of_a_kind 3
   end
@@ -58,8 +63,8 @@ module Kahtzee
   end
 
   def of_a_kind(kind_count)
-    sum = frequency.detect { |_, v| v == kind_count }
-    sum ? sum.reduce(:*) : 0
+    multiplicands = frequency.detect { |_, v| v == kind_count }
+    multiplicands ? multiplicands.reduce(:*) : 0
   end
 
   def tally(die_value)
