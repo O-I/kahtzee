@@ -79,7 +79,7 @@ module Kahtzee
   end
 
   def full_house
-    chance if pair? && three_of_a_kind? && !five_of_a_kind?
+    sum if pair? && three_of_a_kind? && !five_of_a_kind?
   end
 
   def kahtzee
@@ -103,6 +103,10 @@ module Kahtzee
   end
 
   def chance
+    sum
+  end
+
+  def sum
     roll.reduce(:+)
   end
 
