@@ -64,6 +64,9 @@ describe 'Kahtzee' do
 
       expect(score([1, 1, 2, 3, 4], :pair)).to eq 2
       expect(score([1, 2, 2, 1, 6], :pair)).to eq 4
+      expect(score([1, 2, 2, 2, 1], :pair)).to eq 4
+      expect(score([4, 4, 6, 4, 4], :pair)).to eq 8
+      expect(score([6, 6, 6, 6, 6], :pair)).to eq 12
       expect(score([1, 2, 3, 4, 5], :pair)).to eq 0
 
       expect(score([3, 3, 3, 4, 4], :two_pairs)).to eq 14
@@ -72,9 +75,12 @@ describe 'Kahtzee' do
       expect(score([1, 2, 3, 3, 6], :two_pairs)).to eq 0
 
       expect(score([3, 2, 3, 1, 3], :three_of_a_kind)).to eq 9
+      expect(score([3, 1, 3, 3, 3], :three_of_a_kind)).to eq 9
+      expect(score([6, 6, 6, 6, 6], :three_of_a_kind)).to eq 18
       expect(score([1, 2, 3, 3, 2], :three_of_a_kind)).to eq 0
 
       expect(score([6, 5, 6, 6, 6], :four_of_a_kind)).to eq 24
+      expect(score([6, 6, 6, 6, 6], :four_of_a_kind)).to eq 24
       expect(score([1, 1, 2, 2, 2], :four_of_a_kind)).to eq 0
 
       expect(score([1, 2, 3, 4, 5], :small_straight)).to eq 15

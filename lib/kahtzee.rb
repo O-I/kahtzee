@@ -53,13 +53,12 @@ module Kahtzee
     tally 6
   end
 
-  def pair
-    of_a_kind 2
+  def tally(die_value)
+    roll.count(die_value) * die_value
   end
 
-  def two_pairs
-    results = frequency.select { |k, v| v > 1 }
-    results.keys.reduce(:+) * 2 if results.size == 2
+  def pair
+    of_a_kind 2
   end
 
   def three_of_a_kind
@@ -71,11 +70,15 @@ module Kahtzee
   end
 
   def of_a_kind(kind_count)
-    frequency.detect { |_, die_count| die_count == kind_count }.to_a.reduce(:*)
+    if_none = -> { [0] }
+    frequency.detect(if_none) do |_, die_count|
+      die_count >= kind_count
+    end.first * kind_count
   end
 
-  def tally(die_value)
-    roll.count(die_value) * die_value
+  def two_pairs
+    results = frequency.select { |k, v| v > 1 }
+    results.keys.reduce(:+) * 2 if results.size == 2
   end
 
   def small_straight
