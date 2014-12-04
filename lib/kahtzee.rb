@@ -108,9 +108,14 @@ module Kahtzee
   end
 
   def frequency_distribution
-    roll.reduce(Hash.new(0)) do |hash, element|
-      hash[element] += 1
-      hash
-    end.sort_by { |k, v| [-v, -k] }.to_h
+    Hash[order raw_frequency]
+  end
+
+  def raw_frequency
+    roll.reduce(Hash.new(0)) { |hash, element| hash[element] += 1; hash }
+  end
+
+  def order(freq)
+    freq.sort_by { |die_value, occurrences| [-occurrences, -die_value] }
   end
 end
