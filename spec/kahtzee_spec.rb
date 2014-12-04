@@ -24,6 +24,10 @@ describe 'Kahtzee' do
         .to raise_error Kahtzee::BadRollError
       expect { score([1, 2.5, 3, 3, 5], :chance) }
         .to raise_error Kahtzee::BadRollError
+      expect { score(['one', :two, [], {}, -5], :chance) }
+        .to raise_error Kahtzee::BadRollError
+      expect { score(:foo, :chance) }
+        .to raise_error Kahtzee::BadRollError
       expect { score([1, 2, 2, 6, 6], :chance) }
         .not_to raise_error
     end
@@ -31,6 +35,10 @@ describe 'Kahtzee' do
     it 'raises an UnknownCategoryError on invalid category input' do
       expect { score([1, 2, 3, 4, 5], :foo) }
         .to raise_error Kahtzee::UnknownCategoryError
+      expect { score([1, 2, 3, 4, 5], 'sum') }
+        .to raise_error Kahtzee::UnknownCategoryError
+      expect { score([1, 2, 3, 4, 5], :sixes) }
+        .not_to raise_error
       expect { score([1, 2, 3, 4, 5], 'chance') }
         .not_to raise_error
     end
