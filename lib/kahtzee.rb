@@ -63,8 +63,7 @@ module Kahtzee
   end
 
   def of_a_kind(kind_count)
-    results = frequency.detect { |_, v| v == kind_count }
-    results.reduce(:*) if results
+    frequency.detect { |_, die_count| die_count == kind_count }.to_a.reduce(:*)
   end
 
   def tally(die_value)
@@ -112,10 +111,10 @@ module Kahtzee
   end
 
   def raw_frequency
-    roll.reduce(Hash.new(0)) { |hash, element| hash[element] += 1; hash }
+    roll.reduce(Hash.new(0)) { |freq, die| freq[die] += 1; freq }
   end
 
   def order(freq)
-    freq.sort_by { |die_value, occurrences| [-occurrences, -die_value] }
+    freq.sort_by { |die_value, die_count| [-die_count, -die_value] }
   end
 end
