@@ -73,6 +73,8 @@ describe 'Kahtzee' do
       expect(score([6, 4, 5, 4, 5], :two_pairs)).to eq 18
       expect(score([1, 1, 2, 3, 3], :two_pairs)).to eq 8
       expect(score([1, 2, 3, 3, 6], :two_pairs)).to eq 0
+      expect(score([6, 5, 6, 6, 6], :two_pairs)).to eq 0
+      expect(score([6, 6, 6, 6, 6], :two_pairs)).to eq 0
 
       expect(score([3, 2, 3, 1, 3], :three_of_a_kind)).to eq 9
       expect(score([3, 1, 3, 3, 3], :three_of_a_kind)).to eq 9

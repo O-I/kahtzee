@@ -77,7 +77,7 @@ module Kahtzee
   end
 
   def two_pairs
-    results = frequency.select { |k, v| v > 1 }
+    results = frequency.select { |_, die_count| die_count > 1 }
     results.keys.reduce(:+) * 2 if results.size == 2
   end
 
