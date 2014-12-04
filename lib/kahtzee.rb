@@ -18,7 +18,15 @@ module Kahtzee
   private
 
   def valid_roll?
-    roll.size == 5 && (roll - [*1..6]).empty?
+    valid_size? && valid_values?
+  end
+
+  def valid_size?
+    roll.size == 5
+  end
+
+  def valid_values?
+    (roll - [*1..6]).empty?
   end
 
   def ones
